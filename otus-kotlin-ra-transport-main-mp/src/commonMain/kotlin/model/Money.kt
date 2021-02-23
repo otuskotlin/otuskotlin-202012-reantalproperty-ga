@@ -1,10 +1,11 @@
 package model
 
+import kotlinx.serialization.Serializable
 
 /**
  * Деньги
  */
-
+@Serializable
 data class Money(
     /** Сумма */
     var amount: Double? = null,
