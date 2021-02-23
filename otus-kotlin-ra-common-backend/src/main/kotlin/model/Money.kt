@@ -8,7 +8,7 @@ import java.math.BigDecimal
 
 data class Money(
     /** Сумма */
-    var amount: BigDecimal? = null,
+    var amount: Double? = null,
     /** Код валюты, 3-х символьный */
     var currencyCode: String? = null
 )

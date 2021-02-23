@@ -6,7 +6,7 @@ import model.enums.PropertyType
 
 data class Property(
     val idModel: IdModel,
-    var property: PropertyType,
+    var propertyType: PropertyType,
     var price: Money,
     var address: Address,
     var countOfRooms: Int,

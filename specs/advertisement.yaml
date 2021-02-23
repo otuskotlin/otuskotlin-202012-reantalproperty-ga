@@ -1,0 +1,234 @@
+openapi: 3.0.0
+info:
+  title: This is a sample of apartment rent advertisements
+  description: 'Учебный проект - сайт по аренде недвижимости'
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/v1
+tags:
+  - name: advertisements
+    description: Everything about apartment advertisements
+paths:
+
+  /advertisement:
+    put:
+      tags:
+        - advertisements
+      summary: Update an existing advertisement
+      operationId: updateAd
+      requestBody:
+        description: Advertisement of apartment that needs to be updated to the site
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Advertisement'
+        required: true
+      responses:
+        405:
+          description: Validation exception
+          content: { }
+    post:
+      tags:
+        - advertisements
+      summary: Add a new advertisement to the site
+      operationId: addAd
+      requestBody:
+        description: Advertisement of apartment that needs to be updated to the site
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Advertisement'
+        required: true
+      responses:
+        "200":
+          description: Успех
+          content: { }
+
+  /advertisement/{id}:
+    get:
+      tags:
+        - advertisements
+      summary: Gets an advertisement by ID.
+      operationId: getAdById
+      parameters:
+        - name: id
+          in: path
+          description: advertisement ID
+          required: true
+          schema:
+            type: object
+            items:
+              $ref: '#/components/schemas/IdModel'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Advertisement'
+
+    delete:
+      tags:
+        - "advertisements"
+      summary: "Delete an advertisement"
+      description: ""
+      operationId: "deleteAdvertisement"
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: object
+            items:
+              $ref: '#/components/schemas/IdModel'
+          required: true
+          description: The user ID.
+      responses:
+        '204':
+          description: Ad was deleted.
+
+components:
+  schemas:
+
+    Advertisement:
+      type: object
+      properties:
+        id:
+          type: object
+          items:
+            $ref: '#/components/schemas/IdModel'
+        adOwner:
+          type: object
+          items:
+            $ref: '#/components/schemas/User'
+        property:
+          type: object
+          items:
+            $ref: '#/components/schemas/Property'
+        dateFrom:
+          type: string
+          format: date-time
+        dateTill:
+          type: string
+          format: date-time
+        status:
+          type: string
+          description: Ad Status
+          enum:
+            - active
+            - inactive
+
+    IdModel:
+      type: object
+      title: Единица измерения
+      properties:
+        id:
+          type: string
+          title: Идентификатор
+
+    User:
+      type: object
+      title: Пользователь
+      properties:
+        id:
+          type: object
+          items:
+            $ref: '#/components/schemas/IdModel'
+        login:
+          type: string
+          title: Логин пользователя
+        fName:
+          type: string
+          title: Имя пользователя
+        sName:
+          type: string
+          title: Фамилия пользователя
+
+
+    Address:
+      type: object
+      title: Адрес местонахождения объекта недвижимости
+      properties:
+        id:
+          type: object
+          items:
+            $ref: '#/components/schemas/IdModel'
+        county:
+          type: string
+          title: Регион местонахождения объекта недвижимости
+        distinct:
+          type: string
+          title: Район местонахождения объекта недвижимости
+        street:
+          type: string
+          title: Улица местонахождения объекта недвижимости
+        buildNumber:
+          type: string
+          title: Номер дома/строения местонахождения объекта недвижимости
+
+    Property:
+      type: object
+      title: Недвижимость
+      properties:
+        id:
+          type: object
+          items:
+            $ref: '#/components/schemas/IdModel'
+        propertyType:
+          type: string
+          description: Тип недвижимости
+          enum:
+            - flat
+            - house
+            - room
+        price:
+          type: object
+          items:
+            $ref: '#/components/schemas/Money'
+        address:
+          type: object
+          items:
+            $ref: '#/components/schemas/Address'
+        countOfRooms:
+          type: integer
+          description: Количество комнат
+        countOfBaths:
+          type: number
+          format: double
+          description: Количество ванных комнат
+        square:
+          type: integer
+          description: Площадь объекта недвижимости
+        isFurnished:
+          type: boolean
+          description: Мебилирован объект недвижимости да/нет
+        lease:
+          type: object
+          items:
+            $ref: '#/components/schemas/Lease'
+
+    Money:
+      type: object
+      title: Деньги
+      properties:
+        amount:
+          type: number
+          format: double
+        currencyCode:
+          type: string
+          description: Валюта
+    Lease:
+      type: string
+      description: Срок аренды
+      enum:
+        - hour
+        - day
+        - week
+        - month
+        - half_of_year
+        - one_year_and_more
+
+    
+
