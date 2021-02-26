@@ -8,7 +8,8 @@ data class Advertisement(
     val id: IdModel,
     val adOwner: User,
     var property: Property,
-//    val dateFrom: Time,
-//    var dateTill: LocalDateTime,
+    val dateFrom: String,
+    var dateTill: String,
+    val isActive: Boolean
 )
 

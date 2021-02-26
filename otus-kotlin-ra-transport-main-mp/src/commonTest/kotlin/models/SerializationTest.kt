@@ -3,10 +3,7 @@ package models
 import kotlinx.serialization.json.Json
 import model.Address
 import model.Money
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertNotEquals
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 internal class SerializationTest {
     @Test
@@ -35,11 +32,13 @@ internal class SerializationTest {
         }
         val addressStr = json.encodeToString(Address.serializer(), address)
         println(addressStr)
-        assertTrue { addressStr.contains("Dublin city") }
+        assertTrue { addressStr.contains("Dublin county") }
         assertTrue { addressStr.contains("Corduff") }
         val dto = json.decodeFromString(Address.serializer(), addressStr)
         assertEquals("Dublin county", dto.county)
         assertNotEquals("Cork", dto.city)
-
+        assertNull(dto.street)
+        assertNull(dto.buildNumber)
+        assertNull(dto.distinct)
     }
 }

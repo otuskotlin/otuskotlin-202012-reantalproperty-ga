@@ -119,6 +119,9 @@ components:
           enum:
             - active
             - inactive
+        isActive:
+          type: boolean
+          description: Объявление активно (Да/ Нет)
 
     IdModel:
       type: object
