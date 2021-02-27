@@ -1,4 +1,4 @@
-package model
+package multiplatform.dto
 
 import kotlinx.serialization.Serializable
 

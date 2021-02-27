@@ -1,8 +1,8 @@
 package models
 
 import kotlinx.serialization.json.Json
-import model.Address
-import model.Money
+import multiplatform.dto.Address
+import multiplatform.dto.Money
 import kotlin.test.*
 
 internal class SerializationTest {
@@ -15,7 +15,7 @@ internal class SerializationTest {
         val moneyStr = json.encodeToString(Money.serializer(), money)
         println(moneyStr)
         assertTrue { moneyStr.contains("RUB") }
-        assertTrue { moneyStr.contains("2.0") }
+        assertTrue { moneyStr.contains("2") }
         val dto = json.decodeFromString(Money.serializer(), moneyStr)
         assertEquals("RUB", dto.currencyCode)
         assertNotEquals(3.0, dto.amount)

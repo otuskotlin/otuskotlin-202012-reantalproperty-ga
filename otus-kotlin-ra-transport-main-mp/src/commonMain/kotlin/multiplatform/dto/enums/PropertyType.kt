@@ -1,4 +1,4 @@
-package model.enums
+package multiplatform.dto.enums
 
 import kotlinx.serialization.Serializable
 

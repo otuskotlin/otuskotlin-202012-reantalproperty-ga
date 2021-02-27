@@ -59,9 +59,8 @@ paths:
           description: advertisement ID
           required: true
           schema:
-            type: object
-            items:
-              $ref: '#/components/schemas/IdModel'
+            type: string
+            title: id
       responses:
         '200':
           description: Successful operation
@@ -80,9 +79,8 @@ paths:
         - in: path
           name: id
           schema:
-            type: object
-            items:
-              $ref: '#/components/schemas/IdModel'
+            type: string
+            title: id
           required: true
           description: The user ID.
       responses:
@@ -96,9 +94,8 @@ components:
       type: object
       properties:
         id:
-          type: object
-          items:
-            $ref: '#/components/schemas/IdModel'
+          type: string
+          title: id
         adOwner:
           type: object
           items:
@@ -119,33 +116,25 @@ components:
           enum:
             - active
             - inactive
-        isActive:
+        active:
           type: boolean
           description: Объявление активно (Да/ Нет)
 
-    IdModel:
-      type: object
-      title: Единица измерения
-      properties:
-        id:
-          type: string
-          title: Идентификатор
 
     User:
       type: object
       title: Пользователь
       properties:
         id:
-          type: object
-          items:
-            $ref: '#/components/schemas/IdModel'
+          type: string
+          title: id
         login:
           type: string
           title: Логин пользователя
-        fName:
+        firstName:
           type: string
           title: Имя пользователя
-        sName:
+        secondName:
           type: string
           title: Фамилия пользователя
 
@@ -154,10 +143,6 @@ components:
       type: object
       title: Адрес местонахождения объекта недвижимости
       properties:
-        id:
-          type: object
-          items:
-            $ref: '#/components/schemas/IdModel'
         county:
           type: string
           title: Регион местонахождения объекта недвижимости
@@ -179,9 +164,8 @@ components:
       title: Недвижимость
       properties:
         id:
-          type: object
-          items:
-            $ref: '#/components/schemas/IdModel'
+          type: string
+          title: id
         propertyType:
           type: string
           description: Тип недвижимости
@@ -207,7 +191,7 @@ components:
         square:
           type: integer
           description: Площадь объекта недвижимости
-        isFurnished:
+        furnished:
           type: boolean
           description: Мебилирован объект недвижимости да/нет
         lease:

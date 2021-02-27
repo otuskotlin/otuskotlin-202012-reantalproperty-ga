@@ -14,6 +14,7 @@ internal class SerializationTest {
         val dto = gson.fromJson(json, Money::class.java)
         assertEquals("RUB", dto.currencyCode)
         assertNotEquals(3.0, dto.amount)
+
     }
 
 

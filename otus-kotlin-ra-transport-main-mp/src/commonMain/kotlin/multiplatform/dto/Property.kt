@@ -1,19 +1,19 @@
-package model
+package multiplatform.dto
 
 import kotlinx.serialization.Serializable
-import model.enums.Lease
-import model.enums.PropertyType
+import multiplatform.dto.enums.Lease
+import multiplatform.dto.enums.PropertyType
 
 @Serializable
 data class Property(
-    val idModel: IdModel,
+    val idModel: String,
     var propertyType: PropertyType,
     var price: Money,
     var address: Address,
     var countOfRooms: Int,
     var countofBaths: Int,
     var square: Double,
-    var isFurnished: Boolean,
+    var furnished: Boolean,
     // Срок аренды
     var lease: Lease,
 

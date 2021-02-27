@@ -5,14 +5,14 @@ import model.enums.PropertyType
 
 
 data class Property(
-    val idModel: IdModel,
+    val idModel: String,
     var propertyType: PropertyType,
     var price: Money,
     var address: Address,
     var countOfRooms: Int,
     var countofBaths: Int,
     var square: Double,
-    var isFurnished: Boolean,
+    var furnished: Boolean,
     // Срок аренды
     var lease: Lease
 
