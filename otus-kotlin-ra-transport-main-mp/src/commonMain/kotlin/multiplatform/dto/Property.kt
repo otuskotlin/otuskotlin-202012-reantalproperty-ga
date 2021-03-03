@@ -6,7 +6,7 @@ import multiplatform.dto.enums.PropertyType
 
 @Serializable
 data class Property(
-    val idModel: String,
+    val id: String,
     var propertyType: PropertyType,
     var price: Money,
     var address: Address,

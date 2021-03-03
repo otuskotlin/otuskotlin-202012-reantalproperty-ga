@@ -9,7 +9,7 @@ import kotlin.test.assertEquals
 class AddressMapperTest {
     @Test
     fun toBackMappingTest() {
-        val addressMapper =  AddressMapper()
+        val addressMapper =  AddressMapper.INSTANCE
         val address = Address("Dublin", "Cork")
         val addressBackModel = addressMapper.toBack(address)
         assertEquals(addressBackModel.county, address.county)
@@ -18,7 +18,7 @@ class AddressMapperTest {
 
     @Test
     fun toOpenapiMappingTest() {
-        val addressMapper =  AddressMapper()
+        val addressMapper =  AddressMapper.INSTANCE
         val addressBackModel = model.Address("Dublin", "Cork", null,null,null)
         val address = addressMapper.toOpenApi(addressBackModel)
         assertEquals(address.county, addressBackModel.county)

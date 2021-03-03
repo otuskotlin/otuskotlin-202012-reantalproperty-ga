@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Money(
     /** Сумма */
-    var amount: Double? = null,
+    var amount: String? = null,
     /** Код валюты, 3-х символьный */
     var currencyCode: String? = null
 )

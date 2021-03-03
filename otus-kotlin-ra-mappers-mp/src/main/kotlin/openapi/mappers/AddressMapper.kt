@@ -1,8 +1,14 @@
 package openapi.mappers
 
 import model.Address
-
-class AddressMapper {
+import org.mapstruct.Mapper
+import org.mapstruct.ReportingPolicy
+import org.mapstruct.factory.Mappers
+@Mapper(unmappedSourcePolicy = ReportingPolicy.ERROR)
+open class AddressMapper {
+    companion object {
+        val INSTANCE: AddressMapper = Mappers.getMapper(AddressMapper::class.java)
+    }
 
     fun toOpenApi(addressBackModel: Address): org.example.transport.openapi.models.Address {
         with(addressBackModel) {
@@ -20,15 +26,10 @@ class AddressMapper {
 
 
     fun toBack(adressMpModel: org.example.transport.openapi.models.Address): Address {
-        val countyBack = adressMpModel.county
-        val buildNumberBack = adressMpModel.buildNumber
-        val cityBack = adressMpModel.city
-        val streetBack = adressMpModel.street
-        val distinctBack = adressMpModel.distinct
-
-        val address = Address(county = countyBack, buildNumber = buildNumberBack, city = cityBack, street = streetBack,
-            distinct = distinctBack
-        )
-        return address
+        with(adressMpModel) {
+            return Address(county = county, buildNumber = buildNumber, city = city, street = street,
+                distinct = distinct
+            )
+        }
     }
 }

@@ -8,7 +8,7 @@ import kotlin.test.*
 internal class SerializationTest {
     @Test
     fun moneySerialTest() {
-        val money = Money(currencyCode = "RUB", amount = 2.0)
+        val money = Money(currencyCode = "RUB", amount = "2.0")
         val json = Json {
             prettyPrint = true
         }

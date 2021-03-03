@@ -1,5 +1,8 @@
 package model
 
+import java.math.BigDecimal
+import java.math.BigInteger
+
 
 /**
  * Деньги
@@ -7,7 +10,7 @@ package model
 
 data class Money(
     /** Сумма */
-    var amount: Double? = null,
+    var amount: BigDecimal? = null,
     /** Код валюты, 3-х символьный */
     var currencyCode: String? = null
 )

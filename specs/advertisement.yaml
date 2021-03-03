@@ -98,27 +98,28 @@ components:
           title: id
         adOwner:
           type: object
-          items:
-            $ref: '#/components/schemas/User'
+          $ref: '#/components/schemas/User'
         property:
           type: object
-          items:
-            $ref: '#/components/schemas/Property'
+          $ref: '#/components/schemas/Property'
         dateFrom:
           type: string
           format: date-time
         dateTill:
           type: string
           format: date-time
-        status:
-          type: string
-          description: Ad Status
-          enum:
-            - active
-            - inactive
         active:
           type: boolean
           description: Объявление активно (Да/ Нет)
+      required:
+        - id
+        - adOwner
+        - property
+        - dateFrom
+        - dateTill
+        - status
+        - active
+
 
 
     User:
@@ -128,15 +129,14 @@ components:
         id:
           type: string
           title: id
-        login:
-          type: string
-          title: Логин пользователя
         firstName:
           type: string
           title: Имя пользователя
         secondName:
           type: string
           title: Фамилия пользователя
+      required:
+      - id
 
 
     Address:
@@ -175,29 +175,35 @@ components:
             - room
         price:
           type: object
-          items:
-            $ref: '#/components/schemas/Money'
+          $ref: '#/components/schemas/Money'
         address:
           type: object
-          items:
-            $ref: '#/components/schemas/Address'
+          $ref: '#/components/schemas/Address'
         countOfRooms:
           type: integer
           description: Количество комнат
         countOfBaths:
-          type: number
-          format: double
+          type: integer
           description: Количество ванных комнат
         square:
-          type: integer
+          type: double
           description: Площадь объекта недвижимости
         furnished:
           type: boolean
           description: Мебилирован объект недвижимости да/нет
         lease:
           type: object
-          items:
-            $ref: '#/components/schemas/Lease'
+          $ref: '#/components/schemas/Lease'
+      required:
+        - id
+        - propertyType
+        - price
+        - address
+        - countOfRooms
+        - countOfBaths
+        - square
+        - furnished
+        - lease
 
     Money:
       type: object
@@ -205,7 +211,7 @@ components:
       properties:
         amount:
           type: number
-          format: double
+          format: integer
         currencyCode:
           type: string
           description: Валюта

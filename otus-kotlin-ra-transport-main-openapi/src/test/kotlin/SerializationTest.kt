@@ -1,16 +1,17 @@
 import com.google.gson.Gson
 import org.example.transport.openapi.models.Address
 import org.example.transport.openapi.models.Money
+import java.math.BigDecimal
 import kotlin.test.*
 
 internal class SerializationTest {
     @Test
     fun moneySerialTest() {
         val gson = Gson()
-        val money = Money(currencyCode = "RUB", amount = 2.0)
+        val money = Money(currencyCode = "RUB", amount = BigDecimal(2.0))
         val json = gson.toJson(money)
         assertTrue { json.contains("RUB") }
-        assertTrue { json.contains("2.0") }
+        assertTrue { json.contains("2") }
         val dto = gson.fromJson(json, Money::class.java)
         assertEquals("RUB", dto.currencyCode)
         assertNotEquals(3.0, dto.amount)
