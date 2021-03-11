@@ -11,7 +11,7 @@ data class Property(
     var price: Money,
     var address: Address,
     var countOfRooms: Int,
-    var countofBaths: Int,
+    var countOfBaths: Int,
     var square: Double,
     var furnished: Boolean,
     // Срок аренды

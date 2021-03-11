@@ -1,21 +1,32 @@
 package multiplatform.mappers
 
 import model.Address
-import org.mapstruct.Mapper
-import org.mapstruct.NullValueCheckStrategy
-import org.mapstruct.ReportingPolicy
-import org.mapstruct.factory.Mappers
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.ERROR,
-    nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
-interface AddressMapper {
+
+class AddressMapper {
     companion object {
-        val INSTANCE: AddressMapper
-                = Mappers.getMapper(AddressMapper::class.java)
+        val INSTANCE: AddressMapper = AddressMapper()
     }
 
-    fun toMultiplfatform(addressBackModel: Address): multiplatform.dto.Address
+    fun toMultiplfatform(addressBackModel: Address): multiplatform.dto.Address {
+        with(addressBackModel) {
+            val multiplatformAddress = multiplatform.dto.Address(
+                county = county,
+                street = street,
+                buildNumber = buildNumber,
+                distinct = distinct,
+                city = city
+            )
+            return multiplatformAddress
+        }
+    }
 
 
-    fun toBack(adressMpModel: multiplatform.dto.Address): Address
+    fun toBack(adressMpModel: multiplatform.dto.Address): Address {
+        with(adressMpModel) {
+            return Address(county = county, buildNumber = buildNumber, city = city, street = street,
+                distinct = distinct
+            )
+        }
+    }
 }

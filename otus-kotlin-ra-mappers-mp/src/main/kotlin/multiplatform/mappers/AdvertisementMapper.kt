@@ -1,21 +1,37 @@
 package multiplatform.mappers
 
 import model.Advertisement
-import org.mapstruct.Mapper
-import org.mapstruct.Mapping
-import org.mapstruct.NullValueCheckStrategy
-import org.mapstruct.ReportingPolicy
-import org.mapstruct.factory.Mappers
+import java.time.LocalDateTime
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.ERROR,
-    nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
-interface AdvertisementMapper {
+class AdvertisementMapper {
     companion object {
-        val INSTANCE: AdvertisementMapper
-                = Mappers.getMapper(AdvertisementMapper::class.java)
+        val INSTANCE: AdvertisementMapper = AdvertisementMapper()
     }
-    fun toMultiplfatform(advertisementBackModel: Advertisement): multiplatform.dto.Advertisement
+
+    fun toMultiplfatform(advertisementBackModel: Advertisement): multiplatform.dto.Advertisement {
+        val adOwner = UserMapper.INSTANCE.toMultiplfatform(advertisementBackModel.adOwner)
+        val property = PropertyMapper.INSTANCE.toMultiplfatform(advertisementBackModel.property)
+
+        with(advertisementBackModel) {
+            return multiplatform.dto.Advertisement(id = id,
+                adOwner = adOwner,
+                active = active,
+                dateFrom = dateFrom.toString(),
+                dateTill = dateTill.toString(),
+                property = property
+            )
+        }
+    }
 
 
-    fun toBack(advertisementMpModel: multiplatform.dto.Advertisement): Advertisement
+    fun toBack(advertisementMpModel: multiplatform.dto.Advertisement): Advertisement {
+        val adOwner = UserMapper.INSTANCE.toBack(advertisementMpModel.adOwner)
+        val property = PropertyMapper.INSTANCE.toBack(advertisementMpModel.property)
+
+        with(advertisementMpModel) {
+            return Advertisement(id = id, adOwner = adOwner, active = active, dateFrom = LocalDateTime.parse(dateFrom),
+                dateTill = LocalDateTime.parse(dateTill), property = property
+            )
+        }
+    }
 }

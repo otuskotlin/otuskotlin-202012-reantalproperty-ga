@@ -1,14 +1,10 @@
 package openapi.mappers
 
 import model.enums.PropertyType
-import org.mapstruct.Mapper
-import org.mapstruct.ReportingPolicy
-import org.mapstruct.factory.Mappers
 
-@Mapper(unmappedSourcePolicy = ReportingPolicy.ERROR)
 open class PropertyTypeMapper {
     companion object {
-        val INSTANCE: PropertyTypeMapper = Mappers.getMapper(PropertyTypeMapper::class.java)
+        val INSTANCE: PropertyTypeMapper = PropertyTypeMapper()
     }
 
     fun toOpenApi(propertyTypeBackModel: PropertyType): org.example.transport.openapi.models.Property.PropertyType {

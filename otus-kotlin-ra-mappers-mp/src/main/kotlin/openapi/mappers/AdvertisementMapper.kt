@@ -1,16 +1,12 @@
 package openapi.mappers
 
 import model.Advertisement
-import org.mapstruct.Mapper
-import org.mapstruct.ReportingPolicy
-import org.mapstruct.factory.Mappers
 import java.time.OffsetDateTime
 
-@Mapper(unmappedSourcePolicy = ReportingPolicy.ERROR)
 open class AdvertisementMapper {
 
     companion object {
-        val INSTANCE: AdvertisementMapper = Mappers.getMapper(AdvertisementMapper::class.java)
+        val INSTANCE: AdvertisementMapper = AdvertisementMapper()
     }
 
 

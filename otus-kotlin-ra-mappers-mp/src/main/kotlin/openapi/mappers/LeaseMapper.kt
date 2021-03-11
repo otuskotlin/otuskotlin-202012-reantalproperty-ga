@@ -1,15 +1,11 @@
 package openapi.mappers
 
 import model.enums.Lease
-import org.mapstruct.Mapper
-import org.mapstruct.ReportingPolicy
-import org.mapstruct.factory.Mappers
 
-@Mapper(unmappedSourcePolicy = ReportingPolicy.ERROR)
 open class LeaseMapper {
 
     companion object {
-        val INSTANCE: LeaseMapper = Mappers.getMapper(LeaseMapper::class.java)
+        val INSTANCE: LeaseMapper = LeaseMapper()
     }
 
     fun toOpenApi(leaseBackModel: Lease): org.example.transport.openapi.models.Lease {
@@ -20,7 +16,7 @@ open class LeaseMapper {
             Lease.MONTH -> org.example.transport.openapi.models.Lease.month
             Lease.ONE_YEAR_AND_MORE -> org.example.transport.openapi.models.Lease.oneYearAndMore
             Lease.WEEK -> org.example.transport.openapi.models.Lease.week
-            else ->  throw RuntimeException("No match for this Lease - $leaseBackModel")
+            else -> throw RuntimeException("No match for this Lease - $leaseBackModel")
         }
 
     }
