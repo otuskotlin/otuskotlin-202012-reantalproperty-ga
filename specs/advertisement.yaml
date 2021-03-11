@@ -48,7 +48,7 @@ paths:
           content: { }
 
   /advertisement/{id}:
-    get:
+    post:
       tags:
         - advertisements
       summary: Gets an advertisement by ID.

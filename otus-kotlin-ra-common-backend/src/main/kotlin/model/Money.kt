@@ -7,7 +7,6 @@ import java.math.BigInteger
 /**
  * Деньги
  */
-
 data class Money(
     /** Сумма */
     var amount: BigDecimal? = null,

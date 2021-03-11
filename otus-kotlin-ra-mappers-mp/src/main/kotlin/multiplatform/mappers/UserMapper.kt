@@ -1,16 +1,22 @@
 package multiplatform.mappers
 
 import model.User
-import org.mapstruct.Mapper
-import org.mapstruct.Mapping
-import org.mapstruct.NullValueCheckStrategy
-import org.mapstruct.ReportingPolicy
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.ERROR,
-    nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
-interface UserMapper {
-    fun toMultiplfatform(userBackModel: User): multiplatform.dto.User
+class UserMapper {
+    companion object {
+        val INSTANCE: UserMapper = UserMapper()
+    }
+
+    fun toMultiplfatform(userBackModel: User): multiplatform.dto.User {
+        return multiplatform.dto.User(userBackModel.id,
+            userBackModel.firstName,
+            userBackModel.secondName)
+    }
 
 
-    fun toBack(userMpModel: multiplatform.dto.User): User
+    fun toBack(userMpModel: multiplatform.dto.User): User {
+        return User(userMpModel.id,
+            userMpModel.firstName,
+            userMpModel.secondName)
+    }
 }

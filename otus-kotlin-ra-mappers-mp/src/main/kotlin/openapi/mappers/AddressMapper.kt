@@ -1,13 +1,10 @@
 package openapi.mappers
 
 import model.Address
-import org.mapstruct.Mapper
-import org.mapstruct.ReportingPolicy
-import org.mapstruct.factory.Mappers
-@Mapper(unmappedSourcePolicy = ReportingPolicy.ERROR)
+
 open class AddressMapper {
     companion object {
-        val INSTANCE: AddressMapper = Mappers.getMapper(AddressMapper::class.java)
+        val INSTANCE: AddressMapper = AddressMapper()
     }
 
     fun toOpenApi(addressBackModel: Address): org.example.transport.openapi.models.Address {

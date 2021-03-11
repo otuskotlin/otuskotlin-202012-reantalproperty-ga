@@ -2,7 +2,6 @@ plugins{
     kotlin("multiplatform") apply false
     kotlin("jvm") apply false
     kotlin("js") apply false
-    kotlin("kapt") apply false
 }
 subprojects {
     group = rootProject.group

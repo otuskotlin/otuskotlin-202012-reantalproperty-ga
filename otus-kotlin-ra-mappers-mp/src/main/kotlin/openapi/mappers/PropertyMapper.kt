@@ -1,19 +1,15 @@
 package openapi.mappers
 
 import model.Property
-import org.mapstruct.Mapper
-import org.mapstruct.ReportingPolicy
-import org.mapstruct.factory.Mappers
 
-@Mapper(unmappedSourcePolicy = ReportingPolicy.ERROR)
 open class PropertyMapper {
 
     companion object {
-        val INSTANCE: PropertyMapper = Mappers.getMapper(PropertyMapper::class.java)
+        val INSTANCE: PropertyMapper = PropertyMapper()
     }
 
-    fun toOpenApi(userBackModel: Property): org.example.transport.openapi.models.Property {
-        with(userBackModel) {
+    fun toOpenApi(propertyBackModel: Property): org.example.transport.openapi.models.Property {
+        with(propertyBackModel) {
 
             return org.example.transport.openapi.models.Property(
                 address = AddressMapper.INSTANCE.toOpenApi(address),
@@ -28,8 +24,8 @@ open class PropertyMapper {
         }
     }
 
-    fun toBack(userMpModel: org.example.transport.openapi.models.Property): Property {
-        with(userMpModel) {
+    fun toBack(propertyMpModel: org.example.transport.openapi.models.Property): Property {
+        with(propertyMpModel) {
 
             return Property(address = AddressMapper.INSTANCE.toBack(address),
                 id = id,
